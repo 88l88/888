@@ -1,18 +1,29 @@
+function toggleRowColor(rowElement) {
+            var activeRows = document.querySelectorAll('.active-row');
+            activeRows.forEach(function(r) {
+                if (r !== rowElement) r.classList.remove('active-row');
+            });
+            rowElement.classList.toggle('active-row');
+        }
 var DateStr = (function(){
-  var d = new Date();
-  var pad = function(n) { return (n < 10 ? '0' : '') + n; };
-  return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  return new Intl.DateTimeFormat('zh-TW', {
+    year: 'numeric', month: '2-digit', day: '2-digit'
+  }).format(new Date()).replace(/\//g, '-');
 })();
 
 var WeekStr = (function(){
-  var weeks = ['日', '一', '二', '三', '四', '五', '六'];
-  var index = new Date().getDay(); // 取得 0 (日) 到 6 (六)
-  return '(' + weeks[index] + ')';
+  // 'narrow' 會直接輸出 "一"、"二"、"日"
+  const w = new Intl.DateTimeFormat('zh-TW', { weekday: 'narrow' }).format(new Date());
+  return `(${w})`;
 })();
 
 var TimeStr = (function(){
-  var d = new Date();
-  var pad = function(n) { return (n < 10 ? '0' : '') + n; };
-  return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  return new Intl.DateTimeFormat('zh-TW', {
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+  }).format(new Date());
 })();
-
+function OtherDate(offset = 0, base = new Date()) {
+  var d = new Date(base);
+  d.setDate(d.getDate() + offset);
+  return new Intl.DateTimeFormat('zh-TW', {year: 'numeric', month: '2-digit', day: '2-digit'}).format(d).replace(/\//g, '-');
+}
