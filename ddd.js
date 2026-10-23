@@ -1,7 +1,6 @@
-var UPDATED = ""; //OK 2026-10-23(五) 155257 (已全部更新,尚未開獎日期 最後(最新,最上方)ㄧ期的期次+1)未全部更新則寫"";
-var NODATED = ""; //NO 2026-10-22(四) 2026-10-21(三)...(尚未更新的日期）已全部更新則寫"";
-
-var ddd = [
+var ddd=[
+['2026-10-23',['17','03','07','14','27']],
+['2026-10-22',['03','28','23','14','08']],
 ['2026-10-21',['04','18','28','15','08']],
 ['2026-10-20',['30','36','38','15','01']],
 ['2026-10-19',['36','12','04','16','22']],
@@ -6001,25 +6000,3 @@ var ddd = [
 ['2007-01-02',['33','02','37','12','36']],
 ['2007-01-01',['27','38','09','11','28']]
 ];
-
-var DATE = "";
-var WEEK = "";
-var TIME = "";
-
-function updateDateTime() {
-    const now = new Date();
-    
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    DATE = `${year}-${month}-${day}`;
-    
-    const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
-    WEEK = weekDays[now.getDay()];
-    
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    TIME = `${hours}:${minutes}:${seconds}`;
-}
-updateDateTime();
